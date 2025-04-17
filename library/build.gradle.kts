@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.serialization)
 //    alias(libs.plugins.androidLibrary)
 }
 
@@ -36,6 +37,7 @@ kotlin {
             dependencies {
                 //put your multiplatform dependencies here
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinx.serialization.json)
             }
         }
         val commonTest by getting {
