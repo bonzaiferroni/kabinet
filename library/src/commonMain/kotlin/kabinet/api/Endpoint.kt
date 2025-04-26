@@ -68,6 +68,16 @@ open class GetByIdEndpoint<Returned>(
     fun replaceClientId(id: Any) = this.clientIdTemplate.replace(":id", id.toString())
 }
 
+open class DeleteEndpoint<Sent>(
+    parent: Endpoint<*>? = null,
+    pathNode: String = "",
+) : Endpoint<Boolean>(parent, pathNode)
+
+open class UpdateEndpoint<Sent>(
+    parent: Endpoint<*>? = null,
+    pathNode: String = "",
+) : Endpoint<Boolean>(parent, pathNode)
+
 class EndpointParam<T>(
     val key: String,
     private val toValue: (String) -> T,
