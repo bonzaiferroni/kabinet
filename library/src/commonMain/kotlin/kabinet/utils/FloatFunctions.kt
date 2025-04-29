@@ -18,3 +18,4 @@ fun Float.toMetricString(): String {
     return if (showDecimal) "$rounded$suffix" else "${rounded.toInt()}$suffix"
 }
 
+fun Double.toMetricString() = this.toFloat().toMetricString()
