@@ -10,8 +10,11 @@ fun Float.toMetricString(): String {
         abs >= 1_000                 -> 1_000f                 to "k"
         else                         -> 1f                     to ""
     }
+
     val result = this / divisor
     val rounded = (result * 10).toInt() / 10f // 1 decimal place
-    return "$rounded$suffix"
+
+    val showDecimal = suffix != ""
+    return if (showDecimal) "$rounded$suffix" else "${rounded.toInt()}$suffix"
 }
 
