@@ -1,5 +1,7 @@
 package kabinet.utils
 
+import kotlin.random.Random
+
 fun Float.toMetricString(): String {
     val abs = kotlin.math.abs(this)
     val (divisor, suffix) = when {
@@ -19,3 +21,9 @@ fun Float.toMetricString(): String {
 }
 
 fun Double.toMetricString() = this.toFloat().toMetricString()
+
+fun Float.Companion.random() = Random.nextFloat()
+
+fun Float.Companion.random(max: Float) = random() * max
+
+fun Float.Companion.random(min: Float, maxFloat: Float) = random() * (maxFloat - min) + min
