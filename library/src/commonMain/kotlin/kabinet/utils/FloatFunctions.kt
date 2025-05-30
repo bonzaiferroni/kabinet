@@ -1,5 +1,7 @@
 package kabinet.utils
 
+import kotlin.math.pow
+import kotlin.math.round
 import kotlin.random.Random
 
 fun Float.toMetricString(): String {
@@ -26,3 +28,8 @@ fun Float.Companion.random() = Random.nextFloat()
 fun Float.Companion.random(max: Float) = random() * max
 
 fun Float.Companion.random(min: Float, maxFloat: Float) = random() * (maxFloat - min) + min
+
+fun Float.format(decimals: Int = 2): String {
+    val multiplier = 10.0.pow(decimals).toFloat()
+    return (round(this * multiplier) / multiplier).toString()
+}
