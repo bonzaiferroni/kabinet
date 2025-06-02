@@ -4,4 +4,4 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
-fun randomUuidString() = Uuid.random()
+fun randomUuidString() = Uuid.random().toString()
