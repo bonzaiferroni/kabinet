@@ -7,11 +7,9 @@ import kotlin.uuid.Uuid
 
 fun randomUuidStringId() = Uuid.random().toStringId()
 
-fun Uuid.toLongPair(): Pair<Long, Long> =
-    toLongs { msb, lsb -> (msb to lsb).also { println("toLongPair ${it.first}-${it.second}") } }
+fun Uuid.toLongPair(): Pair<Long, Long> = toLongs { msb, lsb -> (msb to lsb) }
 
-fun Pair<Long, Long>.toUuid(): Uuid =
-    Uuid.fromLongs(first, second)
+fun Pair<Long, Long>.toUuid(): Uuid = Uuid.fromLongs(first, second)
 
 fun Uuid.toStringId() = toLongPair().let { "${it.first.toBase62()}-${it.second.toBase62()}" }
 
