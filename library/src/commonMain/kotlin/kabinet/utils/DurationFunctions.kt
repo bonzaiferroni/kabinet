@@ -6,7 +6,7 @@ import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
-fun Duration.formatSpanBrief() = when {
+fun Duration.toShortDescription() = when {
     this >= 365.days -> "${this.inWholeDays / 365}y"
     this >= 1.days -> "${this.inWholeDays}d"
     this >= 1.hours -> "${this.inWholeHours}h"
@@ -18,7 +18,7 @@ fun Duration.formatSpanBrief() = when {
     else -> "${this.inWholeDays / 365}y"
 }
 
-fun Duration.formatSpanLong() = when {
+fun Duration.toAgoDescription() = when {
     this > 365.days -> "${this.inWholeDays / 365} years ago"
     this > 2.days -> "${this.inWholeDays} days ago"
     this > 1.days -> "1 day ago"
