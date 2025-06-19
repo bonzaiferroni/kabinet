@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    val id: String,
+    val id: UserId,
     val username: String,
     val roles: RoleSet,
     val avatarUrl: String?,
@@ -18,3 +18,5 @@ val User.isAdmin: Boolean
 
 val User.isUser: Boolean
     get() = UserRole.USER in roles
+
+typealias UserId = String
