@@ -7,11 +7,11 @@ import kotlin.random.Random
 fun Float.toMetricString(): String {
     val abs = kotlin.math.abs(this)
     val (divisor, suffix) = when {
-        abs >= 1_000_000_000_000_000 -> 1_000_000_000_000_000f to " Q"
-        abs >= 1_000_000_000_000     -> 1_000_000_000_000f     to " T"
-        abs >= 1_000_000_000         -> 1_000_000_000f         to " B"
-        abs >= 1_000_000             -> 1_000_000f             to " M"
-        abs >= 1_000                 -> 1_000f                 to " k"
+        abs >= 1_000_000_000_000_000 -> 1_000_000_000_000_000f to "Q"
+        abs >= 1_000_000_000_000     -> 1_000_000_000_000f     to "T"
+        abs >= 1_000_000_000         -> 1_000_000_000f         to "B"
+        abs >= 1_000_000             -> 1_000_000f             to "M"
+        abs >= 1_000                 -> 1_000f                 to "k"
         else                         -> 1f                     to ""
     }
 
