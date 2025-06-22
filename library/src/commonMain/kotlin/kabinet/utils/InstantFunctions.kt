@@ -105,3 +105,7 @@ fun Month.toLongFormat() = when (this) {
     Month.DECEMBER -> "December"
     else -> error("Not a month")
 }
+
+fun Instant.toDoubleMillis(): Double = toEpochMilliseconds().toDouble()
+fun Instant.Companion.fromDoubleMillis(d: Double): Instant =
+    Instant.fromEpochMilliseconds(d.toLong())
