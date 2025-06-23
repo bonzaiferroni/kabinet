@@ -26,7 +26,7 @@ fun LocalDateTime.toInstantFromUtc() = this.toInstant(TimeZone.UTC)
 
 fun LocalDateTime.toInstantFromLocal() = this.toInstant(TimeZone.currentSystemDefault())
 
-fun Instant.toLocalDateTime() = this.toLocalDateTime(TimeZone.currentSystemDefault())
+fun Instant.toLocalDateTime(isLocalTime: Boolean = false) = this.toLocalDateTime(if (isLocalTime) TimeZone.UTC else TimeZone.currentSystemDefault())
 
 fun Instant.toRelativeDayFormat(): String {
     val time = this.toLocalDateTime()
@@ -42,9 +42,10 @@ fun Instant.toRelativeDayFormat(): String {
     else return "${time.monthNumber}/${time.dayOfMonth}/${time.year}"
 }
 
-fun Instant.toTimeFormat() = this.toLocalDateTime().let { "${it.hour12}:${it.minute.toString().padStart(2, '0')} ${it.amPmLabel}" }
+fun Instant.toTimeFormat(isLocalTime: Boolean = false) = this.toLocalDateTime(isLocalTime)
+    .let { "${it.hour12}:${it.minute.toString().padStart(2, '0')} ${it.amPmLabel}" }
 
-fun Instant.toRelativeTimeFormat () = "${this.toRelativeDayFormat()} at ${this.toTimeFormat()}"
+fun Instant.toRelativeTimeFormat (isLocalTime: Boolean = false) = "${this.toRelativeDayFormat()} at ${this.toTimeFormat(isLocalTime)}"
 
 val LocalDateTime.hour12 get() = if (hour == 0) 12 else if (hour > 12) hour - 12 else hour
 
