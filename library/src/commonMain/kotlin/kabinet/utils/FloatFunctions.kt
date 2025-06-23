@@ -15,10 +15,18 @@ fun Float.toMetricString(): String {
         else                         -> 1f                     to ""
     }
 
-    val result = this / divisor
-    val rounded = (result * 10).toInt() / 10f // 1 decimal place
+    val result  = this / divisor
+    val rounded = (result * 10).toInt() / 10f
 
-    return if (suffix != "") "$rounded$suffix" else "${rounded.toInt()}$suffix"
+    return if (suffix.isNotEmpty()) {
+        "$rounded$suffix"
+    } else {
+        if (rounded < 10 && rounded % 1f != 0f) {
+            "$rounded"
+        } else {
+            "${rounded.toInt()}"
+        }
+    }
 }
 
 fun Double.toMetricString() = this.toFloat().toMetricString()
