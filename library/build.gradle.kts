@@ -38,6 +38,9 @@ kotlin {
                 //put your multiplatform dependencies here
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.serialization.json)
+                implementation(libs.ktor.client.core)
+
+                api(libs.kotlinx.serialization.cbor)
             }
         }
         val commonTest by getting {
