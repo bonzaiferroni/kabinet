@@ -13,4 +13,8 @@ fun String.takeEllipsis(length: Int, ellipsis: String = "..."): String =
 
 fun pluralize(value: Int) = if (value == 1) "" else "s"
 
+fun String.pluralize(value: Int) = if (value == 1) this else "${this}s"
+
+fun String.pluralize(value: Float) = if (value == 1f) this else "${this}s"
+
 fun String.toSnakeCase(): String = this.replace(Regex("([a-z])([A-Z])"), "$1_$2").lowercase()
