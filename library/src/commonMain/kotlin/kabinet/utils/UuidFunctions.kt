@@ -5,7 +5,7 @@ package kabinet.utils
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-fun randomUuidStringId() = Uuid.random().toStringId()
+fun generateUuidString() = Uuid.random().toStringId()
 
 fun Uuid.toStringId() = this.toString()
 
