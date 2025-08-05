@@ -1,7 +1,7 @@
 package kabinet.db
 
-interface TableId {
-    val value: String
-
-    val isEmpty get() = value.isEmpty()
+interface TableId<T> {
+    val value: T
 }
+
+val TableId<String>.isEmpty get() = value.isEmpty()
