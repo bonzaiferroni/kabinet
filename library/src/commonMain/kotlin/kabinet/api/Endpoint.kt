@@ -1,5 +1,6 @@
 package kabinet.api
 
+import kabinet.db.TableId
 import kotlinx.datetime.Instant
 
 sealed class Endpoint<Received>(
@@ -66,6 +67,15 @@ open class GetByIdEndpoint<Returned>(
     val clientIdTemplate: String get() = "$path/:id"
     val serverIdTemplate: String get() = "$path/{id}"
     fun replaceClientId(id: Any) = this.clientIdTemplate.replace(":id", id.toString())
+}
+
+open class GetByTableIdEndpoint<Id: TableId<*>, Returned>(
+    parent: Endpoint<*>? = null,
+    pathNode: String = "",
+): Endpoint<Returned>(parent, pathNode) {
+    val clientIdTemplate: String get() = "$path/:id"
+    val serverIdTemplate: String get() = "$path/{id}"
+    fun replaceClientId(id: Id) = this.clientIdTemplate.replace(":id", id.toString())
 }
 
 open class DeleteEndpoint<Sent>(
