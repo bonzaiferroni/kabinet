@@ -41,3 +41,5 @@ fun Float.format(decimals: Int = 2): String {
     val multiplier = 10.0.pow(decimals).toFloat()
     return (round(this * multiplier) / multiplier).toString()
 }
+
+fun lerp(a: Float, b: Float, t: Float) = a + (b - a) * t
