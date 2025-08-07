@@ -75,7 +75,7 @@ open class GetByTableIdEndpoint<Id: TableId<*>, Returned>(
 ): Endpoint<Returned>(parent, pathNode) {
     val clientIdTemplate: String get() = "$path/:id"
     val serverIdTemplate: String get() = "$path/{id}"
-    fun replaceClientId(id: Id) = this.clientIdTemplate.replace(":id", id.toString())
+    fun replaceClientId(id: Id) = this.clientIdTemplate.replace(":id", id.value.toString())
 }
 
 open class DeleteEndpoint<Sent>(
