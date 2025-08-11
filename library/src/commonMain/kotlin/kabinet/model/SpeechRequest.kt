@@ -6,7 +6,8 @@ import kotlinx.serialization.Serializable
 data class SpeechRequest(
     val text: String,
     val theme: String? = null,
-    val voice: SpeechVoice? = null
+    val voice: SpeechVoice? = null,
+    val filename: String? = null,
 )
 
 enum class SpeechVoice(
