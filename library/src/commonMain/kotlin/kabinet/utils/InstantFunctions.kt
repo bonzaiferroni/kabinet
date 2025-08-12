@@ -110,3 +110,6 @@ fun Month.toLongFormat() = when (this) {
 fun Instant.toDoubleMillis(): Double = toEpochMilliseconds().toDouble()
 fun Instant.Companion.fromDoubleMillis(d: Double): Instant =
     Instant.fromEpochMilliseconds(d.toLong())
+
+fun Instant.toTimeDescription() = this.toLocalDateTime().let { "${it.hour12}:${it.minute.toString().padStart(2, '0')} ${it.amPmLabel}" }
+fun Instant.toDayDescription() = this.toLocalDateTime().let { "${it.dayOfWeek.toLongFormat()} the ${it.dayOfMonth.toOrdinalSuffix()} of ${it.month.toLongFormat()}" }
