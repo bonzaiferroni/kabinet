@@ -36,6 +36,12 @@ sealed class Endpoint<Received>(
         toString = { it }
     )
 
+    fun addBooleanParam(key: String) = EndpointParam(
+        key = key,
+        toValue = { it.toBoolean() },
+        toString = { it.toString() }
+    )
+
     fun addIntList(key: String) = addListParam(key, { it.toInt()}, { it.toString() })
 
     fun <T> addListParam(key: String, toValue: (String) -> T, toString: (T) -> String) = EndpointParam<Collection<T>>(
