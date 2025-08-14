@@ -113,3 +113,5 @@ fun Instant.Companion.fromDoubleMillis(d: Double): Instant =
 
 fun Instant.toTimeDescription() = this.toLocalDateTime().let { "${it.hour12}:${it.minute.toString().padStart(2, '0')} ${it.amPmLabel}" }
 fun Instant.toDayDescription() = this.toLocalDateTime().let { "${it.dayOfWeek.toLongFormat()} the ${it.dayOfMonth.toOrdinalSuffix()} of ${it.month.toLongFormat()}" }
+
+fun Instant.Companion.fromEpochSecondsDouble(value: Double) = Instant.fromEpochSeconds(value.toLong())
