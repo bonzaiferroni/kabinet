@@ -1,13 +1,24 @@
 package kabinet.api
 
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.parameter
+import io.ktor.http.HttpMethod
 import kabinet.db.TableId
 import kotlinx.datetime.Instant
 
-sealed class Endpoint<Received>(
-    val parent: Endpoint<*>?,
-    val pathNode: String
+abstract class Endpoint<SentType, ReturnType>(
+    val method: HttpMethod?,
+    val parent: Endpoint<*, *>?,
+    val pathNode: String,
+    val appendId: Boolean = false,
 ) {
-    val path: String = parent?.let { "${it.path}$pathNode" } ?: pathNode
+    val pathSegments: List<String> = createPathSegments()
+    val path: String = pathSegments.joinToString("/")
+    val serverIdTemplate: String get() = "$path/{id}"
+
+    private fun createPathSegments(): MutableList<String> = (parent?.createPathSegments() ?: mutableListOf()).also {
+        it.add(pathNode)
+    }
 
     fun <T> addParam(key: String, toValue: (String) -> T, toString: (T) -> String, ) =
         EndpointParam<T>(key, toValue, toString)
@@ -51,59 +62,61 @@ sealed class Endpoint<Received>(
     )
 }
 
-open class ParentEndpoint(
-    parent: Endpoint<*>? = null,
+open class ApiNode(
+    parent: Endpoint<*, *>? = null,
     pathNode: String,
-): Endpoint<Unit>(parent, pathNode)
+): Endpoint<Unit, Unit>(null, parent, pathNode)
 
 open class GetEndpoint<Returned>(
-    parent: Endpoint<*>? = null,
+    parent: Endpoint<*, *>? = null,
     pathNode: String = "",
-): Endpoint<Returned>(parent, pathNode)
+): Endpoint<Unit, Returned>(HttpMethod.Get, parent, pathNode)
 
 open class PostEndpoint<Sent, Returned>(
-    parent: Endpoint<*>? = null,
+    parent: Endpoint<*,*>? = null,
     pathNode: String = "",
-): Endpoint<Returned>(parent, pathNode)
+): Endpoint<Sent, Returned>(HttpMethod.Post, parent, pathNode)
 
 open class GetByIdEndpoint<Returned>(
-    parent: Endpoint<*>? = null,
+    parent: Endpoint<*, *>? = null,
     pathNode: String = "",
-) : Endpoint<Returned>(parent, pathNode) {
+) : Endpoint<Unit, Returned>(HttpMethod.Get, parent, pathNode, true) {
     val clientIdTemplate: String get() = "$path/:id"
-    val serverIdTemplate: String get() = "$path/{id}"
     fun replaceClientId(id: Any) = this.clientIdTemplate.replace(":id", id.toString())
 }
 
 open class GetByTableIdEndpoint<Id: TableId<*>, Returned>(
-    parent: Endpoint<*>? = null,
+    parent: Endpoint<*,*>? = null,
     pathNode: String = "",
-): Endpoint<Returned>(parent, pathNode) {
+): Endpoint<Returned, Unit>(HttpMethod.Get, parent, pathNode, true) {
     val clientIdTemplate: String get() = "$path/:id"
-    val serverIdTemplate: String get() = "$path/{id}"
     fun replaceClientId(id: Id) = this.clientIdTemplate.replace(":id", id.value.toString())
 }
 
 open class DeleteEndpoint<Sent>(
-    parent: Endpoint<*>? = null,
+    parent: Endpoint<*,*>? = null,
     pathNode: String = "",
-) : Endpoint<Boolean>(parent, pathNode)
+) : Endpoint<Sent, Boolean>(HttpMethod.Delete, parent, pathNode)
 
 open class UpdateEndpoint<Sent>(
-    parent: Endpoint<*>? = null,
+    parent: Endpoint<*,*>? = null,
     pathNode: String = "",
-) : Endpoint<Boolean>(parent, pathNode)
+) : Endpoint<Sent, Boolean>(HttpMethod.Put, parent, pathNode)
 
 class EndpointParam<T>(
     val key: String,
-    private val toValue: (String) -> T,
-    private val toString: (T) -> String,
+    val toValue: (String) -> T,
+    val toString: (T) -> String,
 ) {
     fun write(value: T?) = value?.let { key to toString(value) }
     fun read(str: String) = toValue(str)
 }
 
-class ApiRequestBuilder<E: Endpoint<*>>(
+fun <T> HttpRequestBuilder.write(param: EndpointParam<T>, value: T?) {
+    value?.let { parameter(param.key, param.toString(it)) }
+}
+
+class ApiRequestBuilder<E: Endpoint<*,*>>(
     val endpoint: E
 ) {
     var params: List<Pair<String, String>>? = null

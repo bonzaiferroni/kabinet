@@ -37,5 +37,9 @@ enum class SpeechVoice(
     Gentle("Vindemiatrix"),
     Lively("Sadachbia"),
     Knowledgeable("Sadaltager"),
-    Warm("Sulafat")
+    Warm("Sulafat");
+
+    companion object {
+        fun getByIntrinsicIndex(intrinsicIndex: Int) = entries[intrinsicIndex % entries.size]
+    }
 }
