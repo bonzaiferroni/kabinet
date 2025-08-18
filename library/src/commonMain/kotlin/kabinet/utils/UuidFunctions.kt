@@ -5,11 +5,13 @@ package kabinet.utils
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-fun generateUuidString() = Uuid.random().toStringId()
+fun randomUuidString() = Uuid.random().toStringId()
 
 fun Uuid.toStringId() = this.toString()
 
 fun Uuid.Companion.fromStringId(stringId: String) = Uuid.parse(stringId)
+
+fun String.toUuid() = Uuid.parse(this)
 
 // fun Uuid.toLongPair(): Pair<Long, Long> = toLongs { msb, lsb -> (msb to lsb) }
 //
