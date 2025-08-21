@@ -13,6 +13,43 @@ data class SpeechGenRequest(
 enum class SpeechVoice(
     val apiName: String
 ) {
+    Alloy("af_alloy"),
+    Aoede("af_aoede"),
+    Bella("af_bella"),
+    Heart("af_heart"),
+    Jessica("af_jessica"),
+    Kore("af_kore"),
+    Nicole("af_nicole"),
+    Nova("af_nova"),
+    River("af_river"),
+    Sarah("af_sarah"),
+    Sky("af_sky"),
+    Adam("am_adam"),
+    Echo("am_echo"),
+    Eric("am_eric"),
+    Fenrir("am_fenrir"),
+    Liam("am_liam"),
+    Michael("am_michael"),
+    Onyx("am_onyx"),
+    Puck("am_puck"),
+    Santa("am_santa"),
+    Alice("bf_alice"),
+    Emma("bf_emma"),
+    Isabella("bf_isabella"),
+    Lily("bf_lily"),
+    Daniel("bm_daniel"),
+    Fable("bm_fable"),
+    George("bm_george"),
+    Lewis("bm_lewis");
+
+    companion object {
+        fun getByIntrinsicIndex(intrinsicIndex: Int) = SpeechVoice.entries[intrinsicIndex % SpeechVoice.entries.size]
+    }
+}
+
+enum class GeminiVoice(
+    val apiName: String
+) {
     Bright("Zephyr"),
     Upbeat("Puck"),
     Informative("Charon"),
