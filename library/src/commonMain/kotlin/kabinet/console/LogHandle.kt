@@ -7,7 +7,8 @@ class LogHandle(
     val level: LogLevel = LogLevel.Info,
     private val console: LogConsole,
 ) {
-    var partialLine = LineBuilder()
+    private val lineBuilder = LineBuilder()
+    private val stringBuilder = StringBuilder()
 
     fun log(message: Any?, level: LogLevel = LogLevel.Info) {
         console.log(name, level, message)
@@ -20,8 +21,8 @@ class LogHandle(
     fun logError(message: String) = log(message, LogLevel.Error)
 
     fun logPartial(message: String) {
-        if (partialLine.isEmpty) partialLine.write(message)
-        else partialLine.setForeground(darkForeground).write("┃").defaultForeground().write(message)
+        if (lineBuilder.isEmpty) lineBuilder.write(message)
+        else lineBuilder.setForeground(darkForeground).write("┃").defaultForeground().write(message)
     }
 
     fun cell(
@@ -64,7 +65,7 @@ class LogHandle(
         width: Int? = null,
     ) {
         message?.let { logPartial(it) }
-        var line = partialLine.build().let { line ->
+        var line = lineBuilder.build().let { line ->
             if (width == null) return@let line
             val displayLength = line.visibleLength()
             if (displayLength >= width) return@let line
@@ -77,7 +78,7 @@ class LogHandle(
 
 enum class LogJustify {
     RIGHT,
-    LEFT,
+    Left,
 }
 
 private fun String.visibleLength(): Int {

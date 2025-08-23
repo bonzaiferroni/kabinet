@@ -7,18 +7,12 @@ enum class LogColor(val foreground: Foreground, val background: Background) {
     Purple("#b36d8d".toAnsiForeground(), "#1D003C".toAnsiBackground()),
     Yellow("#aaaf59".toAnsiForeground(), "#857042".toAnsiBackground()),
     Red("#FF4500".toAnsiForeground(), "#4d2e31".toAnsiBackground()),
+    Gray("899999".toAnsiForeground(), "1e2c2c".toAnsiBackground()),
+    Black("000000".toAnsiForeground(), "000000".toAnsiBackground() )
 }
 
-internal const val blueFg = "#9CC6F3"
-internal const val orangeFg = "#FF4500"
-internal const val greenFg = "#50C878"
-internal const val purpleFg = "#967BB6"
-internal const val yellowFg = "#FFD700"
 internal const val cyanFg = "#4AC7C7"
 
-internal const val blueBg = "#183348"
-internal const val greenBg = "#002912"
-internal const val grayBg = "#1e2c2c"
 internal const val brownBg = "#1c1711"
 
 internal fun wrapForeground(value: String, hex: String) = wrapForeground(value, hex.toAnsiForeground())
