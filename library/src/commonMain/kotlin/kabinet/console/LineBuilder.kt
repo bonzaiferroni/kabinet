@@ -3,8 +3,8 @@ package kabinet.console
 class LineBuilder(
 ) {
     val builder = StringBuilder()
-    var foreground = defaultForeground
-    var background = defaultBackground
+    var foreground = ansiDefaultForeground
+    var background = ansiDefaultBackground
     var format = defaultText
     val length get () = builder.length
     val isEmpty get () = builder.isEmpty()
@@ -36,16 +36,16 @@ class LineBuilder(
 
     fun setForeground(level: LogLevel): LineBuilder {
         val color = when (level) {
-            LogLevel.Trace -> oceanBlueFg
-            LogLevel.Debug -> lavenderPurpleFg
-            LogLevel.Info -> emeraldGreenFg
-            LogLevel.Warning -> goldenYellowFg
-            LogLevel.Error -> sunsetOrangeFg
+            LogLevel.Trace -> LogColor.Blue.foreground
+            LogLevel.Debug -> LogColor.Purple.foreground
+            LogLevel.Info -> LogColor.Green.foreground
+            LogLevel.Warning -> LogColor.Yellow.foreground
+            LogLevel.Error -> LogColor.Red.foreground
         }
         return setForeground(color)
     }
 
-    fun defaultForeground() = setForeground(defaultForeground)
+    fun defaultForeground() = setForeground(ansiDefaultForeground)
 
     fun setBackground(hex: String) = setBackground(hex.toAnsiBackground())
 
@@ -56,7 +56,7 @@ class LineBuilder(
         return this
     }
 
-    fun defaultBackground() = setBackground(defaultBackground)
+    fun defaultBackground() = setBackground(ansiDefaultBackground)
 
     fun setFormat(format: Format): LineBuilder {
         if (this.format == format) return this
@@ -73,8 +73,8 @@ class LineBuilder(
     override fun toString() = builder.toString()
 
     fun clear(): LineBuilder {
-        setForeground(defaultForeground)
-        setBackground(defaultBackground)
+        setForeground(ansiDefaultForeground)
+        setBackground(ansiDefaultBackground)
         setFormat(defaultText)
         builder.clear()
         return this

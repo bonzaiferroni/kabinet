@@ -39,7 +39,7 @@ data class Url(
     }
 }
 
-internal fun <T : Url> tryParseUrl(block: () -> T): T? {
+internal fun <T> tryParseUrl(block: () -> T): T? {
     return try {
         block()
     } catch (e: IllegalArgumentException) {

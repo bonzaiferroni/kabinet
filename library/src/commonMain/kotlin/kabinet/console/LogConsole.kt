@@ -37,12 +37,4 @@ class LogConsole(
 
 const val MAX_SOURCE_CHARS = 8
 
-class LogHandle(
-    val name: String,
-    val level: LogLevel = LogLevel.Info,
-    private val console: LogConsole,
-) {
-    fun log(message: Any?, level: LogLevel = LogLevel.Info) {
-        console.log(name, level, message)
-    }
-}
+val globalConsole = LogConsole()
