@@ -1,5 +1,6 @@
 package kabinet.utils
 
+import kotlin.jvm.JvmName
 import kotlin.math.pow
 import kotlin.math.round
 import kotlin.random.Random
@@ -43,3 +44,5 @@ fun Float.format(decimals: Int = 2): String {
 }
 
 fun lerp(a: Float, b: Float, t: Float) = a + (b - a) * t
+
+fun <T> Iterable<T>.sumOfFloat(block: (T) -> Float): Float = this.sumOf { block(it).toDouble() }.toFloat()
