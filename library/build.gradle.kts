@@ -14,7 +14,6 @@ group = "io.github.kotlin"
 version = "1.0.0"
 
 kotlin {
-    jvm()
 //    androidTarget {
 //        publishLibraryVariants("release")
 //        @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -26,7 +25,7 @@ kotlin {
 //    iosArm64()
 //    iosSimulatorArm64()
     linuxX64()
-    js().browser()
+//    js().browser()
     jvm()
     wasmJs {
         browser()
@@ -39,6 +38,9 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.cio)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
 
                 api(libs.kotlinx.serialization.cbor)
             }
