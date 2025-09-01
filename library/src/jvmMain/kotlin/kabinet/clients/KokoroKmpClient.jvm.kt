@@ -8,7 +8,12 @@ import kotlin.use
 
 actual class KokoroKmpClient {
 
+    private val messages = mutableMapOf<String, ByteArray>()
+
     actual fun getMessage(text: String, voice: SpeechVoice) = runPyBytes("../py/speak.py", text, voice.apiName)
+
+    actual fun getCacheMessage(text: String, voice: SpeechVoice) = messages[text]
+        ?: getMessage(text, voice).also { messages[text] = it }
 
     fun runPyBytes(script: String, vararg args: String?, python: String = "python3"): ByteArray {
         val cmd = listOf(python, script) + args

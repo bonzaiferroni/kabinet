@@ -6,4 +6,5 @@ import kabinet.model.SpeechVoice
 
 expect class KokoroKmpClient() {
     fun getMessage(text: String, voice: SpeechVoice = SpeechVoice.Sky): ByteArray
+    fun getCacheMessage(text: String, voice: SpeechVoice = SpeechVoice.Sky): ByteArray
 }
