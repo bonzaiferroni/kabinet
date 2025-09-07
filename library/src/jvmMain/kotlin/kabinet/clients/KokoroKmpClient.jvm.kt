@@ -10,7 +10,7 @@ actual class KokoroKmpClient {
 
     private val messages = mutableMapOf<String, ByteArray>()
 
-    actual fun getMessage(text: String, voice: SpeechVoice) = runPyBytes("../py/speak.py", text, voice.apiName)
+    actual fun getMessage(text: String, voice: SpeechVoice) = runPyBytes("../kabinet/py/speak.py", text, voice.apiName)
 
     actual fun getCacheMessage(text: String, voice: SpeechVoice) = messages[text]
         ?: getMessage(text, voice).also { messages[text] = it }
