@@ -40,9 +40,11 @@ kotlin {
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.cio)
                 implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.client.encoding)
                 implementation(libs.ktor.serialization.kotlinx.json)
 
                 api(libs.kotlinx.serialization.cbor)
+                api("com.fleeksoft.ksoup:ksoup:0.2.5")
             }
         }
         val commonTest by getting {
