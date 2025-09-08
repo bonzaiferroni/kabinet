@@ -4,10 +4,10 @@ import kabinet.api.PostEndpoint
 import kabinet.clients.GeminiMessage
 import kabinet.model.ImageGenRequest
 import kabinet.model.ImageUrls
-import kabinet.model.SpeechGenRequest
+import kabinet.model.SpeechRequest
 
 interface GeminiApi {
     val chat: PostEndpoint<List<GeminiMessage>, String>
     val image: PostEndpoint<ImageGenRequest, ImageUrls>
-    val speech: PostEndpoint<SpeechGenRequest, String>
+    val speech: PostEndpoint<SpeechRequest, String>
 }

@@ -3,7 +3,7 @@ package kabinet.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SpeechGenRequest(
+data class SpeechRequest(
     val text: String,
     val theme: String? = null,
     val voice: SpeechVoice? = null,
