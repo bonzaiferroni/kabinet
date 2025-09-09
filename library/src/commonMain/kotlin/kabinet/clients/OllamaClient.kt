@@ -65,10 +65,10 @@ class OllamaClient(
 
     suspend fun prompt(
         text: String,
-        model: String = OllamaModel.Gemma3.apiLabel
+        model: OllamaModel = OllamaModel.Gemma3,
     ): String? = request(
         OllamaGenerateRequest(
-            model = model,
+            model = model.apiLabel,
             prompt = text,
             stream = false,
         )
@@ -76,12 +76,12 @@ class OllamaClient(
 
     suspend fun streamPrompt(
         text: String,
-        model: String = OllamaModel.Gemma3.apiLabel,
+        model: OllamaModel = OllamaModel.Gemma3,
         onToken: suspend (String) -> Unit
     ): String? {
         val response = request(
             OllamaGenerateRequest(
-                model = model,
+                model = model.apiLabel,
                 prompt = text,
                 stream = true,
             )
@@ -104,10 +104,10 @@ class OllamaClient(
 
     suspend fun embed(
         text: String,
-        model: String = OllamaModel.NomicEmbed.apiLabel
+        model: OllamaModel = OllamaModel.NomicEmbed
     ) = request(
         OllamaEmbedRequest(
-            model = model,
+            model = model.apiLabel,
             input = text
         )
     )?.body<OllamaEmbedResponse>()
@@ -140,5 +140,8 @@ enum class OllamaModel(val apiLabel: String) {
     Llama31("llama3.1"),
     NomicEmbed("nomic-embed-text"),
     Mistral("mistral"),
-    Phi3("phi3")
+    Phi3("phi3"),
+    MxbaiEmbed("mxbai-embed-large"),
+    Qwen3Embed06B("ryanshillington/Qwen3-Embedding-0.6B"),
+    GemmaEmbed("embeddinggemma")
 }
