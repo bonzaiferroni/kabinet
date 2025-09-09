@@ -4,7 +4,6 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.accept
@@ -45,7 +44,7 @@ class OllamaClient(
                         protocol = URLProtocol.HTTP
                         host = "localhost"
                         port = 11434
-                        encodedPath = "api/generate"
+                        encodedPath = request.endpoint
                     }
                     contentType(ContentType.Application.Json)
                     setBody(request)
@@ -68,12 +67,12 @@ class OllamaClient(
         text: String,
         model: String = OllamaModel.Gemma3.apiLabel
     ): String? = request(
-        OllamaRequest(
+        OllamaGenerateRequest(
             model = model,
             prompt = text,
             stream = false,
         )
-    )?.body<OllamaResponse>()?.response
+    )?.body<OllamaGenerateResponse>()?.response
 
     suspend fun streamPrompt(
         text: String,
@@ -81,7 +80,7 @@ class OllamaClient(
         onToken: suspend (String) -> Unit
     ): String? {
         val response = request(
-            OllamaRequest(
+            OllamaGenerateRequest(
                 model = model,
                 prompt = text,
                 stream = true,
@@ -89,12 +88,12 @@ class OllamaClient(
         )
         val channel: ByteReadChannel = response?.bodyAsChannel() ?: return null
 
-        var last: OllamaResponse? = null
+        var last: OllamaGenerateResponse? = null
         while (!channel.isClosedForRead) {
             val line = channel.readUTF8Line() ?: break
             if (line.isBlank()) continue
 
-            val chunk = json.decodeFromString<OllamaResponse>(line)
+            val chunk = json.decodeFromString<OllamaGenerateResponse>(line)
             chunk.response?.let { onToken(it) }
             last = chunk
 
@@ -102,6 +101,16 @@ class OllamaClient(
         }
         return last?.response
     }
+
+    suspend fun embed(
+        text: String,
+        model: String = OllamaModel.NomicEmbed.apiLabel
+    ) = request(
+        OllamaEmbedRequest(
+            model = model,
+            input = text
+        )
+    )?.body<OllamaEmbedResponse>()
 }
 
 private val json = Json { ignoreUnknownKeys = true }
