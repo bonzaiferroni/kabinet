@@ -25,11 +25,11 @@ kotlin {
 //    iosArm64()
 //    iosSimulatorArm64()
     linuxX64()
-//    js().browser()
-    jvm()
-    wasmJs {
-        browser()
-    }
+    jvm("desktop")
+//    wasmJs {
+//        browser()
+//    }
+
 
     sourceSets {
         val commonMain by getting {
@@ -51,6 +51,9 @@ kotlin {
             dependencies {
                 implementation(libs.kotlin.test)
             }
+        }
+        val desktopMain by getting {
+            resources.srcDir("py") // files end up at classpath root
         }
     }
 }
