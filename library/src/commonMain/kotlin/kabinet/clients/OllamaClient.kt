@@ -145,5 +145,7 @@ enum class OllamaModel(val apiLabel: String) {
     Qwen3Embed06B("ryanshillington/Qwen3-Embedding-0.6B"),
     GemmaEmbed("embeddinggemma"),
     BgeM3("bge-m3"),
-    SnowflakeArctic("snowflake-arctic-embed")
+    SnowflakeArctic("snowflake-arctic-embed"),
+    MiniLm("all-minilm"),
+    GraniteEmbed("granite-embedding"),
 }
