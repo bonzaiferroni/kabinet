@@ -59,18 +59,18 @@ fun dotProduct(origin: FloatArray, target: FloatArray): Float {
 
 fun distance(origin: FloatArray, target: FloatArray) = 1 - dotProduct(origin, target)
 
-fun averageAndNormalize(vectors: List<FloatArray>): FloatArray {
-    require(vectors.isNotEmpty()) { "The list of vectors cannot be empty" }
-    val size = vectors.first().size
-    require(vectors.all { it.size == size }) { "All vectors must be the same size" }
+fun List<FloatArray>.averageAndNormalize(): FloatArray {
+    require(isNotEmpty()) { "The list of vectors cannot be empty" }
+    val size = first().size
+    require(all { it.size == size }) { "All vectors must be the same size" }
 
     // Calculate the element-wise average
     val averaged = FloatArray(size) { i ->
-        vectors.sumOf { it[i].toDouble() }.toFloat() / vectors.size
+        sumOf { it[i].toDouble() }.toFloat() / size
     }
 
     // Normalize the averaged vector
-    val magnitude = kotlin.math.sqrt(averaged.sumOf { (it * it).toDouble() }).toFloat()
+    val magnitude = sqrt(averaged.sumOf { (it * it).toDouble() }).toFloat()
     require(magnitude > 0) { "Cannot normalize a zero vector!" }
     return averaged.map { it / magnitude }.toFloatArray()
 }
