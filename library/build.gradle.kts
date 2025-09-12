@@ -30,7 +30,6 @@ kotlin {
 //        browser()
 //    }
 
-
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -45,6 +44,7 @@ kotlin {
 
                 api(libs.kotlinx.serialization.cbor)
                 api("com.fleeksoft.ksoup:ksoup:0.2.5")
+                api("ai.koog:koog-agents:0.4.1")
             }
         }
         val commonTest by getting {
