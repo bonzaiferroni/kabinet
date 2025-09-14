@@ -13,6 +13,8 @@ fun Clock.Companion.epochSecondsNow() = Clock.System.now().epochSeconds
 
 fun Clock.Companion.startOfDay() = Clock.System.now().toLocalDateTime(tz).date.atStartOfDayIn(tz)
 
+fun Clock.Companion.today() = Clock.System.now().toLocalDateTime(tz).date
+
 fun Clock.Companion.startOfWeek(): Instant {
     val now =Clock.System.now()
     val time = now.toLocalDateTime()
