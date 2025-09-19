@@ -104,7 +104,7 @@ class OllamaClient(
 
     suspend fun embed(
         text: String,
-        model: OllamaModel = OllamaModel.NomicEmbed
+        model: OllamaModel = OllamaModel.MxbaiEmbed
     ) = request(
         OllamaEmbedRequest(
             model = model.apiLabel,
