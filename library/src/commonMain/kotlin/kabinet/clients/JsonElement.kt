@@ -20,8 +20,6 @@ fun <T> JsonElement.toArray(
                 else -> null
             }
         }
-
-        else -> null
     }
 }
 
@@ -39,8 +37,6 @@ fun <T> JsonElement.toSingle(
                 else -> null
             }
         }
-
-        else -> null
     }
 }
 
@@ -53,7 +49,6 @@ fun JsonElement.toStrings(convertObject: ((JsonObject) -> String)? = null) = whe
             else -> null
         } }
     is JsonObject -> convertObject?.let { listOf(it(this)) } ?: emptyList()
-    else -> null
 }
 
 fun <T> JsonArray.findType(type: String, convert: (JsonObject) -> T): T? {
