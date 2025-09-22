@@ -33,3 +33,6 @@ fun Duration.toAgoDescription() = when {
     this > (-365).days -> "in ${-this.inWholeDays} days"
     else -> "in ${-this.inWholeDays / 365} years"
 }
+
+fun Duration.toMinutes() = inWholeSeconds / 60f
+fun Duration.toHours() = inWholeMinutes / 60f

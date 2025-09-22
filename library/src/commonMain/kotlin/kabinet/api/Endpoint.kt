@@ -103,6 +103,11 @@ open class UpdateEndpoint<Sent>(
     pathNode: String = "",
 ) : Endpoint<Sent, Boolean>(HttpMethod.Put, parent, pathNode)
 
+open class SocketDaoEndpoint<Item, ItemId, NewItem>(
+    parent: Endpoint<*,*>? = null,
+    pathNode: String = "",
+): Endpoint<Unit, Unit>(null, parent, pathNode)
+
 class EndpointParam<T>(
     val key: String,
     val toValue: (String) -> T,
