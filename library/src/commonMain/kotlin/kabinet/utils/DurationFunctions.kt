@@ -28,6 +28,7 @@ fun Duration.toAgoDescription() = when {
     this > 1.minutes -> "1 minute ago"
     this > 0.seconds -> "${this.inWholeSeconds} seconds ago"
     this > (-2).minutes -> "in ${-this.inWholeSeconds} seconds"
+    this > (-10).minutes -> "in ${(-this.inWholeSeconds / 60f).format(1)} minutes"
     this > (-2).hours -> "in ${-this.inWholeMinutes} minutes"
     this > (-2).days -> "in ${-this.inWholeHours} hours"
     this > (-365).days -> "in ${-this.inWholeDays} days"
