@@ -49,12 +49,7 @@ private val ktorHtmlClient = HttpClient(CIO) {
             extraHeaders.forEach { (key, value) ->
                 set(key, value)
             }
-            set(HttpHeaders.AcceptEncoding, "gzip, deflate")
         }
-    }
-    install(ContentEncoding) {
-        deflate(1.0F)
-        gzip(0.9F)
     }
     install(HttpSend) {
         maxSendCount = 40
