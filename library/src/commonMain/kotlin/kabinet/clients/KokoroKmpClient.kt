@@ -1,9 +1,8 @@
 package kabinet.clients
 
-import io.ktor.utils.io.charsets.Charset
-import kabinet.model.SpeechVoice
+import kabinet.model.KokoroVoice
 
 expect class KokoroKmpClient() {
-    fun getMessage(text: String, voice: SpeechVoice = SpeechVoice.Bella): ByteArray
-    fun getCacheMessage(text: String, voice: SpeechVoice = SpeechVoice.Sky): ByteArray
+    fun getMessage(text: String, voice: KokoroVoice = KokoroVoice.Bella): ByteArray
+    fun getCacheMessage(text: String, voice: KokoroVoice = KokoroVoice.Sky): ByteArray
 }

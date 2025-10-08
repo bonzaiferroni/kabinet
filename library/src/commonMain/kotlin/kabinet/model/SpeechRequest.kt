@@ -6,15 +6,15 @@ import kotlinx.serialization.Serializable
 data class SpeechRequest(
     val text: String,
     val theme: String? = null,
-    val voice: GeminiVoice? = null,
+    val voice: String? = null,
     val filename: String? = null,
     val isCached: Boolean = false,
 )
 
-enum class SpeechVoice(
+enum class KokoroVoice(
     val apiName: String,
-    override val label: String,
-): LabeledEnum<SpeechVoice> {
+    val label: String,
+) {
     Alloy("af_alloy", "Alloy"),
     Aoede("af_aoede", "Aoede"),
     Bella("af_bella", "Bella"),
@@ -45,7 +45,7 @@ enum class SpeechVoice(
     Lewis("bm_lewis", "Lewis");
 
     companion object {
-        fun getByIntrinsicIndex(intrinsicIndex: Int) = SpeechVoice.entries[intrinsicIndex % SpeechVoice.entries.size]
+        fun getByIntrinsicIndex(intrinsicIndex: Int) = KokoroVoice.entries[intrinsicIndex % KokoroVoice.entries.size]
     }
 }
 
@@ -82,4 +82,13 @@ enum class GeminiVoice(
     companion object {
         fun getByIntrinsicIndex(intrinsicIndex: Int) = entries[intrinsicIndex % entries.size]
     }
+}
+
+enum class OrpheusVoice(
+    val apiName: String
+) {
+    Tara("tara"),
+    Dan("dan"),
+    Josh("josh"),
+    Emma("emma"),
 }

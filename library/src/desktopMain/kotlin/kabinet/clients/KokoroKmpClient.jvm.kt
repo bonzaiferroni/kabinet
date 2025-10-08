@@ -1,7 +1,7 @@
 package kabinet.clients
 
 import io.ktor.utils.io.charsets.Charset
-import kabinet.model.SpeechVoice
+import kabinet.model.KokoroVoice
 import java.io.ByteArrayOutputStream
 import kotlin.concurrent.thread
 import kotlin.use
@@ -10,9 +10,9 @@ actual class KokoroKmpClient {
 
     private val messages = mutableMapOf<String, ByteArray>()
 
-    actual fun getMessage(text: String, voice: SpeechVoice) = runPyBytes("../kabinet/py/speak.py", text, voice.apiName)
+    actual fun getMessage(text: String, voice: KokoroVoice) = runPyBytes("../kabinet/py/speak.py", text, voice.apiName)
 
-    actual fun getCacheMessage(text: String, voice: SpeechVoice) = messages[text]
+    actual fun getCacheMessage(text: String, voice: KokoroVoice) = messages[text]
         ?: getMessage(text, voice).also { messages[text] = it }
 
     fun runPyBytes(script: String, vararg args: String?, python: String = "python3"): ByteArray {
