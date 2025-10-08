@@ -6,8 +6,9 @@ import kotlinx.serialization.Serializable
 data class SpeechRequest(
     val text: String,
     val theme: String? = null,
-    val voice: SpeechVoice? = null,
+    val voice: GeminiVoice? = null,
     val filename: String? = null,
+    val isCached: Boolean = false,
 )
 
 enum class SpeechVoice(
@@ -62,6 +63,7 @@ enum class GeminiVoice(
     Smooth("Algieba"),
     Breathy("Enceladus"),
     Clear("Iapetus"),
+    Clear2("Erinome"),
     Gravelly("Algenib"),
     Informative2("Rasalgethi"),
     Upbeat2("Laomedeia"),
