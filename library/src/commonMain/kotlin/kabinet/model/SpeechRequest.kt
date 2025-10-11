@@ -1,5 +1,6 @@
 package kabinet.model
 
+import kabinet.utils.toFilenameFormat
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -9,7 +10,9 @@ data class SpeechRequest(
     val voice: String? = null,
     val filename: String? = null,
     val isCached: Boolean = false,
-)
+) {
+    fun toFilename(): String = filename?.let { toFilenameFormat(it) } ?: "${toFilenameFormat(text)}-${voice}"
+}
 
 enum class KokoroVoice(
     val apiName: String,
