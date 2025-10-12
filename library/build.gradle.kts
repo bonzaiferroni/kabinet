@@ -45,6 +45,7 @@ kotlin {
                 api(libs.kotlinx.serialization.cbor)
                 api("com.fleeksoft.ksoup:ksoup:0.2.5")
                 api("ai.koog:koog-agents:0.4.1")
+                api("com.google.genai:google-genai:1.22.0")
             }
         }
         val commonTest by getting {
@@ -53,10 +54,16 @@ kotlin {
             }
         }
         val desktopMain by getting {
-            resources.srcDir("py") // files end up at classpath root
             dependencies {
+
             }
         }
+
+//        val jvmMain by getting {
+//            dependencies {
+//
+//            }
+//        }
     }
 }
 
