@@ -4,6 +4,12 @@ fun <T> List<T>.replaceAt(index: Int, item: T) = mapIndexed { i, it -> if (i == 
 
 fun <T> List<T>.removeAt(index: Int) = mapIndexedNotNull { i, it -> if (i == index) null else it }
 
+fun <T> List<T>.replaceOrRemoveAt(index: Int, item: T?) = if (item != null) {
+    replaceAt(index, item)
+} else {
+    removeAt(index)
+}
+
 fun <T> List<T>.moveLeft(index: Int) = if (index == 0) this else mapIndexedNotNull { i, it ->
     when (i) {
         index - 1 -> this[index]
