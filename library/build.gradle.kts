@@ -14,6 +14,7 @@ group = "io.github.kotlin"
 version = "1.0.0"
 
 kotlin {
+    js(IR).browser()
 //    androidTarget {
 //        publishLibraryVariants("release")
 //        @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -45,7 +46,6 @@ kotlin {
                 api(libs.kotlinx.serialization.cbor)
                 api("com.fleeksoft.ksoup:ksoup:0.2.5")
                 api("ai.koog:koog-agents:0.4.1")
-                api("com.google.genai:google-genai:1.22.0")
             }
         }
         val commonTest by getting {

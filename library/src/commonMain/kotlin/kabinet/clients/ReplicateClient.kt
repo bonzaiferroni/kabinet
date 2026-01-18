@@ -24,7 +24,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kabinet.console.globalConsole
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
-import java.util.Base64
+import kotlin.io.encoding.Base64.Default.decode
 import kotlin.time.Duration.Companion.seconds
 
 private val console = globalConsole.getHandle(ReplicateClient::class)
@@ -90,7 +90,7 @@ class ReplicateClient(
             block = block
         )?.body() ?: return null
         val base64Part = response.output?.substringAfter(",") ?: return null
-        return Base64.getDecoder().decode(base64Part)
+        return decode(base64Part)
     }
 
     suspend fun requestFileBytes(
