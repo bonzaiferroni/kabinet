@@ -4,11 +4,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GeoPoint(
-    val x: Double,
-    val y: Double,
+    val lon: Double,
+    val lat: Double,
 ) {
-    val longitude get() = x
-    val latitude get() = y
+    val x get() = lon
+    val y get() = lat
 
-    fun toList(): List<Double> = listOf(latitude, longitude)
+    fun toList(): List<Double> = listOf(lon, lat)
+    fun toArray(): Array<Double> = arrayOf(lon, lat)
 }
