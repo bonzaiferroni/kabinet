@@ -72,6 +72,11 @@ open class GetEndpoint<Returned>(
     pathNode: String = "",
 ): Endpoint<Unit, Returned>(HttpMethod.Get, parent, pathNode)
 
+open class QueryEndpoint<Sent, Returned>(
+    parent: Endpoint<*, *>? = null,
+    pathNode: String = "",
+): Endpoint<Sent, Returned>(HttpMethod.Get, parent, pathNode)
+
 open class PostEndpoint<Sent, Returned>(
     parent: Endpoint<*,*>? = null,
     pathNode: String = "",
