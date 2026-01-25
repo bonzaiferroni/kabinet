@@ -3,7 +3,7 @@ package kabinet.gemini
 import io.ktor.client.call.body
 import io.ktor.http.HttpStatusCode
 import kabinet.console.LogLevel
-import kabinet.model.GeminiVoice
+import kampfire.model.GeminiVoice
 
 suspend fun GeminiClient.generateSpeech(
     text: String,

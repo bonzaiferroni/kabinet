@@ -1,10 +1,10 @@
 package kabinet.gemini
 
-import kabinet.api.PostEndpoint
 import kabinet.clients.GeminiMessage
-import kabinet.model.ImageGenRequest
-import kabinet.model.ImageUrls
-import kabinet.model.SpeechRequest
+import kampfire.api.PostEndpoint
+import kampfire.model.ImageGenRequest
+import kampfire.model.ImageUrls
+import kampfire.model.SpeechRequest
 
 interface GeminiApi {
     val chat: PostEndpoint<List<GeminiMessage>, String>

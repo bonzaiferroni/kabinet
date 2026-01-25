@@ -25,8 +25,3 @@ fun <T> List<T>.moveRight(index: Int) = if (index == size - 1) this else mapInde
         else -> it
     }
 }
-
-fun <T> List<T>.suggestVariation(rootId: String, provideId: (T) -> String) = count { provideId(it).startsWith(rootId) }
-    .takeIf { it > 0 }
-    ?.let { "$rootId ${'A' + it}" }
-    ?: rootId

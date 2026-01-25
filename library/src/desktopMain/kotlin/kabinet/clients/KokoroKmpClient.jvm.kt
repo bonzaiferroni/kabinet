@@ -1,7 +1,7 @@
 package kabinet.clients
 
 import io.ktor.utils.io.charsets.Charset
-import kabinet.model.KokoroVoice
+import kampfire.model.KokoroVoice
 import java.io.ByteArrayOutputStream
 import kotlin.concurrent.thread
 import kotlin.use

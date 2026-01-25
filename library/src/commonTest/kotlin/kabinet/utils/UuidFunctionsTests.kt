@@ -2,6 +2,10 @@
 
 package kabinet.utils
 
+import kampfire.utils.fromStringId
+import kampfire.utils.randomUuidString
+import kampfire.utils.toStringId
+import kampfire.utils.toUuid
 import kotlin.test.*
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

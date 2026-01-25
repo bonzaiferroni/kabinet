@@ -1,6 +1,6 @@
 package kabinet.clients
 
-import kabinet.model.KokoroVoice
+import kampfire.model.KokoroVoice
 
 expect class KokoroKmpClient() {
     fun getMessage(text: String, voice: KokoroVoice = KokoroVoice.Bella): ByteArray
