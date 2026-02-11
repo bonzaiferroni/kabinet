@@ -6,7 +6,6 @@ class LogConsole(
     val minLevel: LogLevel = LogLevel.Debug,
     val writer: LogWriter? = null
 ) {
-    private val builder = LineBuilder()
     private var lastSource: String? = null
 
     fun <T: Any> getHandle(kClass: KClass<T>) = getHandle(kClass.simpleName ?: error("class name not found"))
@@ -20,17 +19,20 @@ class LogConsole(
 
     fun log(source: String, level: LogLevel, message: Any?) {
         val msg = message.toString()
-        writer?.let { writer ->
-            if (level.ordinal >= writer.minLevel.ordinal) writer.writeLine(source, level, msg)
-        }
 
+        writer?.let { w ->
+            if (level.ordinal >= w.minLevel.ordinal) w.writeLine(source, level, msg)
+        }
         if (level.ordinal < minLevel.ordinal) return
 
         val displayedSource = if (lastSource == source) "" else source
         lastSource = source
 
-        val line = builder.bold().setForeground(level).writeLength(displayedSource, MAX_SOURCE_CHARS)
-            .defaultFormat().defaultForeground().write(" ").write(msg).build()
+        val line = LineBuilder()
+            .bold().setForeground(level).writeLength(displayedSource, MAX_SOURCE_CHARS)
+            .defaultFormat().defaultForeground().write(" ").write(msg)
+            .build()
+
         println(line)
     }
 }
