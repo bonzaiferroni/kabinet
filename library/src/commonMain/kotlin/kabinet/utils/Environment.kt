@@ -20,5 +20,5 @@ internal class MapEnvironment(content: String): Environment {
         }
     }
 
-    override fun read(key: String) = map.getValue(key)
+    override fun read(key: String) = map[key] ?: error("environment key not present: $key")
 }
