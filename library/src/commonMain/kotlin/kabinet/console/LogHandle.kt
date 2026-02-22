@@ -14,6 +14,8 @@ class LogHandle(
         console.log(name, level, message)
     }
 
+    fun logException(e: Exception) = log("${e::class.simpleName}: ${e.message}", LogLevel.Error)
+
     fun logTrace(message: String) = log(message, LogLevel.Trace)
     fun logDebug(message: String) = log(message, LogLevel.Debug)
     fun logInfo(message: String) = log(message, LogLevel.Info)
