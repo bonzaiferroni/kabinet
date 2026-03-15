@@ -67,6 +67,7 @@ fun DayOfWeek.toShortFormat() = when (this) {
     DayOfWeek.FRIDAY -> "Fri"
     DayOfWeek.SATURDAY -> "Sat"
     DayOfWeek.SUNDAY -> "Sun"
+    else -> error("no short format: $this")
 }
 
 fun DayOfWeek.toLongFormat() = when (this) {
@@ -77,6 +78,7 @@ fun DayOfWeek.toLongFormat() = when (this) {
     DayOfWeek.FRIDAY -> "Friday"
     DayOfWeek.SATURDAY -> "Saturday"
     DayOfWeek.SUNDAY -> "Sunday"
+    else -> error("no long format: $this")
 }
 
 fun Month.toShortFormat() = when (this) {
@@ -92,6 +94,7 @@ fun Month.toShortFormat() = when (this) {
     Month.OCTOBER -> "Oct"
     Month.NOVEMBER -> "Nov"
     Month.DECEMBER -> "Dec"
+    else -> error("no short format: $this")
 }
 
 fun Month.toLongFormat() = when (this) {
@@ -107,6 +110,7 @@ fun Month.toLongFormat() = when (this) {
     Month.OCTOBER -> "October"
     Month.NOVEMBER -> "November"
     Month.DECEMBER -> "December"
+    else -> error("no long format: $this")
 }
 
 fun Instant.toDoubleMillis(): Double = toEpochMilliseconds().toDouble()
