@@ -30,7 +30,10 @@ kotlin {
 //    wasmJs {
 //        browser()
 //    }
-
+    wasmJs {
+        binaries.executable()
+        browser()
+    }
     sourceSets {
         val commonMain by getting {
             dependencies {
