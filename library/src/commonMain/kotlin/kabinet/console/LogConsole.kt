@@ -39,4 +39,4 @@ class LogConsole(
 
 const val MAX_SOURCE_CHARS = 8
 
-val console = LogConsole()
+val globalConsole = LogConsole()

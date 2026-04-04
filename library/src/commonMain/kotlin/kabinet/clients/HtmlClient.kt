@@ -13,9 +13,9 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
-import kabinet.console.console
+import kabinet.console.globalConsole
 
-private val console = console.getHandle(HtmlClient::class)
+private val console = globalConsole.getHandle(HtmlClient::class)
 
 class HtmlClient(
     private val client: HttpClient = ktorHtmlClient,
