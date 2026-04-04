@@ -22,11 +22,11 @@ import io.ktor.http.encodedPath
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.readUTF8Line
-import kabinet.console.globalConsole
+import kabinet.console.console
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 
-private val console = globalConsole.getHandle(OllamaClient::class)
+private val console = console.getHandle(OllamaClient::class)
 
 class OllamaClient(
     private val client: HttpClient = ktorClient

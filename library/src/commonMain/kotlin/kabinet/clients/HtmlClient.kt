@@ -6,7 +6,6 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.HttpSend
-import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
@@ -14,9 +13,9 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headers
-import kabinet.console.globalConsole
+import kabinet.console.console
 
-private val console = globalConsole.getHandle(HtmlClient::class)
+private val console = console.getHandle(HtmlClient::class)
 
 class HtmlClient(
     private val client: HttpClient = ktorHtmlClient,

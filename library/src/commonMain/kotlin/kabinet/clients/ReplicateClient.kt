@@ -14,20 +14,19 @@ import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsBytes
-import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
-import kabinet.console.globalConsole
+import kabinet.console.console
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 import kotlin.io.encoding.Base64.Default.decode
 import kotlin.time.Duration.Companion.seconds
 
-private val console = globalConsole.getHandle(ReplicateClient::class)
+private val console = console.getHandle(ReplicateClient::class)
 
 class ReplicateClient(
     private val token: String,

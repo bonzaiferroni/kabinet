@@ -11,7 +11,6 @@ import io.ktor.client.request.header
 import io.ktor.client.request.request
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
@@ -20,11 +19,11 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
 import io.ktor.http.encodedPath
 import io.ktor.serialization.kotlinx.json.json
-import kabinet.console.globalConsole
+import kabinet.console.console
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 
-private val console = globalConsole.getHandle(StableDiffClient::class)
+private val console = console.getHandle(StableDiffClient::class)
 
 class StableDiffClient(
     private val client: HttpClient = ktorClient
