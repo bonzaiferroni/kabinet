@@ -9,6 +9,7 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.Month
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
+import kotlinx.datetime.toDeprecatedInstant
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Duration.Companion.days
@@ -28,7 +29,7 @@ fun Instant.toLocalDateTimeUtc() = toLocalDateTime(TimeZone.UTC).let { time ->
     )
 }
 
-fun LocalDateTime.toInstantFromUtc() = this.toInstant(TimeZone.UTC)
+fun LocalDateTime.toInstantFromUtc() = this.toInstant(TimeZone.UTC).toDeprecatedInstant()
 
 fun LocalDateTime.toInstantFromLocal() = this.toInstant(TimeZone.currentSystemDefault())
 
