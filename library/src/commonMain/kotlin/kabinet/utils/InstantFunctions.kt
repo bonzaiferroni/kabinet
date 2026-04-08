@@ -1,27 +1,26 @@
 package kabinet.utils
 
-import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimePeriod
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.Month
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
-import kotlinx.datetime.toDeprecatedInstant
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Instant
 
 fun Instant.toLocalDateTimeUtc() = toLocalDateTime(TimeZone.UTC).let { time ->
     LocalDateTime(
         year = time.year,
-        monthNumber = time.monthNumber,
-        dayOfMonth = time.dayOfMonth,
+        month = time.month,
+        day = time.day,
         hour = time.hour,
         minute = time.minute,
         second = time.second,
@@ -29,7 +28,7 @@ fun Instant.toLocalDateTimeUtc() = toLocalDateTime(TimeZone.UTC).let { time ->
     )
 }
 
-fun LocalDateTime.toInstantFromUtc() = this.toInstant(TimeZone.UTC).toDeprecatedInstant()
+fun LocalDateTime.toInstantFromUtc() = this.toInstant(TimeZone.UTC)
 
 fun LocalDateTime.toInstantFromLocal() = this.toInstant(TimeZone.currentSystemDefault())
 
@@ -45,8 +44,8 @@ fun Instant.toRelativeDayFormat(): String {
     val nextWeek = (now + 7.days).toLocalDateTime()
     if (time < nextWeek) return time.dayOfWeek.toLongFormat()
     val nextYear = (now + 365.days).toLocalDateTime()
-    if (time < nextYear) return "${time.dayOfWeek.toShortFormat()}, ${time.month.toShortFormat()}. ${time.dayOfMonth}"
-    else return "${time.monthNumber}/${time.dayOfMonth}/${time.year}"
+    if (time < nextYear) return "${time.dayOfWeek.toShortFormat()}, ${time.month.toShortFormat()}. ${time.day}"
+    else return "${time.month}/${time.day}/${time.year}"
 }
 
 fun Instant.toTimeFormat(isLocalTime: Boolean = false) = this.toLocalDateTime(isLocalTime)
@@ -119,7 +118,7 @@ fun Instant.Companion.fromDoubleMillis(d: Double): Instant =
     Instant.fromEpochMilliseconds(d.toLong())
 
 fun Instant.toTimeDescription() = this.toLocalDateTime().let { "${it.hour12}:${it.minute.toString().padStart(2, '0')} ${it.amPmLabel}" }
-fun Instant.toDayDescription() = this.toLocalDateTime().let { "${it.dayOfWeek.toLongFormat()} the ${it.dayOfMonth.toOrdinalSuffix()} of ${it.month.toLongFormat()}" }
+fun Instant.toDayDescription() = this.toLocalDateTime().let { "${it.dayOfWeek.toLongFormat()} the ${it.day.toOrdinalSuffix()} of ${it.month.toLongFormat()}" }
 
 fun Instant.Companion.fromEpochSecondsDouble(value: Double) = Instant.fromEpochSeconds(value.toLong())
 
