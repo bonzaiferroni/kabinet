@@ -5,7 +5,7 @@ import com.fleeksoft.ksoup.nodes.Element
 import kabinet.web.Url
 import kabinet.web.toUrl
 import kabinet.web.toUrlOrNull
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 class HtmlReader {
     fun read(
