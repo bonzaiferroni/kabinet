@@ -38,9 +38,20 @@ fun Float.Companion.random(max: Float) = random() * max
 
 fun Float.Companion.random(min: Float, maxFloat: Float) = random() * (maxFloat - min) + min
 
-fun Float.format(decimals: Int = 2): String {
+fun Float.format(decimals: Int = 2, ensureDecimals: Boolean = false): String {
     val multiplier = 10.0.pow(decimals).toFloat()
-    return (round(this * multiplier) / multiplier).toString()
+    val rounded = round(this * multiplier) / multiplier
+    val str = rounded.toString()
+    if (!ensureDecimals) return str
+
+    val dot = str.indexOf('.')
+    return when {
+        dot == -1 -> if (decimals > 0) "$str.${"0".repeat(decimals)}" else str
+        else -> {
+            val have = str.length - dot - 1
+            if (have >= decimals) str else str + "0".repeat(decimals - have)
+        }
+    }
 }
 
 fun lerp(a: Float, b: Float, t: Float) = a + (b - a) * t
