@@ -1,6 +1,5 @@
 package kabinet.utils
 
-import kotlinx.datetime.DateTimePeriod
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDateTime
@@ -33,6 +32,8 @@ fun LocalDateTime.toInstantFromUtc() = this.toInstant(TimeZone.UTC)
 fun LocalDateTime.toInstantFromLocal() = this.toInstant(TimeZone.currentSystemDefault())
 
 fun Instant.toLocalDateTime(isLocalTime: Boolean = false) = this.toLocalDateTime(if (isLocalTime) TimeZone.UTC else TimeZone.currentSystemDefault())
+
+fun Instant.toAgoFormat() = (Clock.System.now() - this).toAgoFormat()
 
 fun Instant.toRelativeDayFormat(): String {
     val time = this.toLocalDateTime()
