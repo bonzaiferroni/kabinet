@@ -12,3 +12,5 @@ fun Int.toOrdinalSuffix(): String {
     }
     return "$this$suffix"
 }
+
+fun Int.toMetricString() = toFloat().toMetricString()
