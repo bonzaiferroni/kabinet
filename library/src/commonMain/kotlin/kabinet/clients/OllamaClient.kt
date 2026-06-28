@@ -53,13 +53,13 @@ class OllamaClient(
                 if (response.status == HttpStatusCode.OK) {
                     return response
                 }
-                console.logError("Ollama API ERROR > ${request.model}: ${response.status}")
+                console.error("Ollama API ERROR > ${request.model}: ${response.status}")
             } catch (e: Exception) {
-                console.logError("Ollama Api: $e")
+                console.error("Ollama Api: $e")
             }
             delay(1000)
         }
-        console.logError("Ollama API ERROR > request fail: $${request.model}")
+        console.error("Ollama API ERROR > request fail: $${request.model}")
         return null
     }
 

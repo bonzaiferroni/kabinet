@@ -1,5 +1,6 @@
 package kabinet.clients
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
@@ -26,7 +27,7 @@ import kotlinx.serialization.json.Json
 import kotlin.io.encoding.Base64.Default.decode
 import kotlin.time.Duration.Companion.seconds
 
-private val console = globalConsole.getHandle(ReplicateClient::class)
+private val console = KotlinLogging.logger(ReplicateClient::class.simpleName!!)
 
 class ReplicateClient(
     private val token: String,
@@ -61,14 +62,14 @@ class ReplicateClient(
                     delay(20.seconds)
                     return@repeat
                 }
-                console.logError("Replicate API ERROR > ${model}: ${response.status}\n$response")
+                console.error { "Replicate API ERROR > ${model}: ${response.status}\n$response" }
                 if (response.status.value in 400..499) return null
             } catch (e: Exception) {
-                console.logError("Replicate Api: $e")
+                console.error(e) { "Replicate Api: $e" }
             }
             delay(3000)
         }
-        console.logError("Replicate API ERROR > request fail: $${model}")
+        console.error { "Replicate API ERROR > request fail: $${model}" }
         return null
     }
 

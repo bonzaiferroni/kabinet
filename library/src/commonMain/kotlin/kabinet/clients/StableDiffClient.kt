@@ -1,5 +1,6 @@
 package kabinet.clients
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
@@ -23,7 +24,7 @@ import kabinet.console.globalConsole
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 
-private val console = globalConsole.getHandle(StableDiffClient::class)
+private val console = KotlinLogging.logger(StableDiffClient::class.simpleName!!)
 
 class StableDiffClient(
     private val client: HttpClient = ktorClient
@@ -50,13 +51,13 @@ class StableDiffClient(
                 if (response.status == HttpStatusCode.OK) {
                     return response
                 }
-                console.logError("StableDiff API ERROR: ${response.status}")
+                console.error { "StableDiff API ERROR: ${response.status}" }
             } catch (e: Exception) {
-                console.logError("StableDiff Api: $e")
+                console.error (e) { "StableDiff Api: $e" }
             }
             delay(1000)
         }
-        console.logError("StableDiff API ERROR > request fail: ${request.prompt}")
+        console.error { "StableDiff API ERROR > request fail: ${request.prompt}" }
         return null
     }
 

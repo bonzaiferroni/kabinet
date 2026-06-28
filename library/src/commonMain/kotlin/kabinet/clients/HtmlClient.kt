@@ -35,7 +35,7 @@ class HtmlClient(
         return try {
             client.get(url)
         } catch (e: Exception) {
-            console.logError(e.message.toString())
+            console.error(e.message.toString())
             null
         }
     }
@@ -73,7 +73,7 @@ private val ktorHtmlClient = HttpClient(CIO) {
         // intercept exceptions (timeouts, DNS, etc.) before Ktor logs 'em
         handleResponseExceptionWithRequest { cause, _ ->
             // do yer own logging here; avoid println to keep silence
-            console.logError(cause.message ?: "ktor error")
+            console.error(cause.message ?: "ktor error")
         }
     }
 }

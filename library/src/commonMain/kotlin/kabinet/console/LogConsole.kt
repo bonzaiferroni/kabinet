@@ -1,5 +1,6 @@
 package kabinet.console
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.reflect.KClass
 
 class LogConsole(
@@ -39,4 +40,24 @@ class LogConsole(
 
 const val MAX_SOURCE_CHARS = 8
 
-val globalConsole = LogConsole()
+// val globalConsole = LogConsole()
+
+@Deprecated("use KotlinLogging.logger")
+object globalConsole {
+    fun getHandle(kClass: KClass<*>) = LogWrapper(kClass.simpleName!!)
+    fun getHandle(source: String) = LogWrapper(source)
+}
+
+class LogWrapper(
+    name: String
+) {
+    private val logger = KotlinLogging.logger(name)
+
+    fun info(message: () -> String) = logger.info(message)
+    fun info(message: String) = logger.info { message }
+    fun log(message: String) = logger.info { message }
+    fun error(e: Throwable, message: () -> String) = logger.error(e, message)
+    fun error(message: String) = logger.error { message }
+    fun error(e: Throwable) = logger.error(e) { }
+    fun warn(message: String) = logger.warn { message }
+}
